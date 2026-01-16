@@ -1,0 +1,68 @@
+{% extends 'layout.html' %}
+
+{% block title %}👥 ניהול לקוחות{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-12 col-lg-10">
+    <div class="card shadow-sm border-0">
+      <div class="card-body">
+        <h3 class="mb-4 text-primary text-center">👥 רשימת לקוחות</h3>
+
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-4 gap-2">
+            <form method="GET" class="d-flex flex-wrap gap-2" role="search">
+              <input type="text" name="search" class="form-control" placeholder="🔍 חפש לפי שם" value="{{ search_query }}">
+              <button type="submit" class="btn btn-outline-primary">חיפוש</button>
+            </form>
+          
+            <div class="d-flex flex-wrap gap-2">
+              <a href="{{ url_for('clients', expired=1) }}" class="btn btn-outline-danger">
+                📅 הצג לקוחות שנגמר להם המנוי   
+              </a>
+            </div>
+        </div>
+        {% if clients %}
+        <div class="table-responsive">
+          <table class="table table-hover align-middle text-center">
+            <thead class="table-dark">
+              <tr>
+                <th>שם</th>
+                <th>🔑 API Key</th>
+                <th>🕵️ Secret Key</th>
+                <th>📅 התחלה</th>
+                <th>📅 סיום</th>
+                <th>⚙️ פעולות</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              {% for client in clients %}
+              <tr>
+                <td>{{ client.name }}</td>
+                <td class="text-truncate" style="max-width: 200px;">*****************************</td>
+                <td class="text-truncate" style="max-width: 200px;">*****************************</td>
+                <td class="text-truncate" style="max-width: 200px;">{{ client.subscription_start or '-' }}</td>
+                <td class="text-truncate" style="max-width: 200px;">{{ client.subscription_end or '-' }}</td>
+
+                <td>
+                    <div class="d-flex flex-wrap gap-2 justify-content-center">
+                      <a href="{{ url_for('edit_client', client_id=client._id) }}" class="btn btn-sm btn-outline-warning">✏️ עריכה</a>
+                      <form method="POST" action="{{ url_for('delete_client', client_id=client._id) }}" onsubmit="return confirm('האם אתה בטוח שברצונך למחוק לקוח זה?')">
+                        <button type="submit" class="btn btn-sm btn-outline-danger">🗑️ מחיקה</button>
+                      </form>
+                    </div>
+                </td>
+                  
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% else %}
+          <p class="text-center text-muted">אין לקוחות להצגה כרגע.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

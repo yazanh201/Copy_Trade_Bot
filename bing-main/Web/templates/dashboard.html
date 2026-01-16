@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+{% block title %} דשבורד ניהול{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-12 col-lg-10">
+    <div class="card shadow-sm border-0">
+      <div class="card-body">
+        <h3 class="mb-4 text-primary text-center">📊 עסקאות פתוחות כרגע</h3>
+        
+        <div id="master-table-container">
+          <!-- התוכן ייכנס כאן דינאמית -->
+        </div>
+
+        <!-- הודעה ברירת מחדל כשאין עסקאות -->
+        <div id="no-data-msg" class="text-center text-muted" style="display: none;">
+          <i class="bi bi-info-circle"></i> אין עסקאות פתוחות כרגע.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  async function refreshTable() {
+    try {
+      const response = await fetch("/dashboard/table");
+      if (response.ok) {
+        const html = await response.text();
+
+        const container = document.getElementById("master-table-container");
+        const noDataMsg = document.getElementById("no-data-msg");
+
+        // בדיקה אם יש <tr> בתוך ה־tbody = יש נתונים
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, "text/html");
+        const hasData = doc.querySelector("tbody tr") !== null;
+
+        if (hasData) {
+          container.innerHTML = html;
+          container.style.display = "block";
+          noDataMsg.style.display = "none";
+        } else {
+          container.innerHTML = "";
+          container.style.display = "none";
+          noDataMsg.style.display = "block";
+        }
+      }
+    } catch (err) {
+      console.error("שגיאה בעדכון הטבלה:", err);
+    }
+  }
+
+  refreshTable(); // ריצה ראשונה מיידית
+  setInterval(refreshTable, 5000); // רענון כל 5 שניות
+</script>
+{% endblock %}

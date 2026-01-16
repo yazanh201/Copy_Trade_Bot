@@ -1,0 +1,34 @@
+{% if master_positions %}
+<div class="table-responsive">
+  <table class="table table-hover align-middle text-center">
+    <thead class="table-dark">
+      <tr>
+        <th>Symbol</th>
+        <th>Position Side</th>
+        <th>Quantity</th>
+        <th>Leverage</th>
+        <th>Take Profit</th>
+        <th>Stop Lose</th>
+        <th>PNL</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for symbol, trade in master_positions.items() %}
+      <tr>
+        <td>{{ symbol }}</td>
+        <td>{{ trade.position_side }}</td>
+        <td>{{ trade.qty }}</td>
+        <td>{{ trade.leverage }}</td>
+        <td>{{ trade.tp or '-' }}</td>
+        <td>{{ trade.sl or '-' }}</td>
+        <td class="{% if trade.unrealizedProfit|default('0')|float >= 0 %}text-success fw-bold{% else %}text-danger fw-bold{% endif %}">
+            {% if trade.unrealizedProfit|float >= 0 %}+{% endif %}{{ trade.unrealizedProfit }}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% else %}
+<p class="text-center text-muted">אין עסקאות פתוחות כרגע.</p>
+{% endif %}

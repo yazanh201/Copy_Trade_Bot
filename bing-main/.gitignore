@@ -1,0 +1,18 @@
+# קבצים רגישים – לא עולים ל-GitHub
+.env
+secret.key
+
+# קובץ לוג
+trades.log
+
+# קבצים זמניים של Python
+__pycache__/
+*.pyc
+
+# # קבצים של IDE
+# .vscode/
+# .idea/
+
+# # קבצים של מערכת הפעלה
+# .DS_Store
+# Thumbs.db

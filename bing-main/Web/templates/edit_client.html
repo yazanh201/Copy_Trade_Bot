@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block title %}✏️ עריכת לקוח{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-12 col-md-8 col-lg-6">
+    <div class="card shadow-sm border-0">
+      <div class="card-body">
+        <h3 class="mb-4 text-center text-primary">✏️ עריכת לקוח</h3>
+        <form method="POST">
+          <div class="mb-3">
+            <label class="form-label">שם הלקוח</label>
+            <input type="text" name="name" class="form-control" value="{{ client.name }}" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">API Key</label>
+            <input type="text" name="api_key" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Secret Key</label>
+            <input type="text" name="secret_key" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">תאריך התחלת מנוי</label>
+            <input type="date" name="subscription_start" class="form-control" value="{{ client.subscription_start }}">
+          </div>
+          
+          <div class="mb-3">
+            <label class="form-label">תאריך סיום מנוי</label>
+            <input type="date" name="subscription_end" class="form-control" value="{{ client.subscription_end }}">
+          </div>          
+          <div class="d-grid">
+            <button type="submit" class="btn btn-primary">💾 שמור שינויים</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

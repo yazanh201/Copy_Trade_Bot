@@ -1,0 +1,10 @@
+aiogram
+aiohttp
+bcrypt
+cryptography
+python-dotenv
+flask
+markupsafe
+motor
+pymongo
+

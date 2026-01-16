@@ -1,0 +1,86 @@
+/* עיצוב כללי */
+body {
+    background-color: #eef1f5;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #212529;
+    margin: 0;
+}
+
+.container {
+    padding-top: 40px;
+}
+
+/* כותרות */
+h1, h2, h3, h4 {
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+/* כרטיסים */
+.card {
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+    background-color: #ffffff;
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+}
+
+/* טבלאות */
+.table {
+    background-color: #ffffff;
+}
+
+.table th {
+    background-color: #dee2e6;
+    color: #212529;
+}
+
+.table th, .table td {
+    vertical-align: middle;
+    padding: 12px;
+    font-size: 0.95rem;
+}
+
+/* כפתורים */
+.btn {
+    border-radius: 6px;
+    transition: 0.2s ease-in-out;
+}
+
+.btn:hover {
+    transform: scale(1.02);
+    opacity: 0.95;
+}
+
+/* התראות */
+.alert {
+    font-size: 0.95rem;
+    padding: 12px 15px;
+    border-radius: 6px;
+}
+
+/* התאמה למסכים קטנים */
+@media (max-width: 768px) {
+    .navbar-brand,
+    .navbar .btn {
+        font-size: 0.9rem;
+    }
+
+    .container {
+        padding: 20px 10px;
+    }
+
+    .card {
+        padding: 15px;
+    }
+
+    .table th, .table td {
+        font-size: 0.9rem;
+    }
+}
+
+
